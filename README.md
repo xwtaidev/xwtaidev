@@ -1,9 +1,8 @@
 <picture>
-  <source media="(max-width: 600px) and (prefers-color-scheme: dark)" srcset="assets/header-mobile-dark.svg">
-  <source media="(max-width: 600px) and (prefers-color-scheme: light)" srcset="assets/header-mobile-light.svg">
+  <source media="(max-width: 600px)" srcset="assets/header-mobile.svg">
   <source media="(prefers-color-scheme: dark)" srcset="assets/header-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="assets/header-light.svg">
-  <img alt="把想法，做成好用的产品。xwtaidev — Independent developer and product maker." src="assets/header-light.svg">
+  <img width="100%" alt="把想法，做成好用的产品。xwtaidev — Independent developer and product maker." src="assets/header-light.svg">
 </picture>
 
 ### 你好，我是 xwtaidev。
@@ -15,8 +14,7 @@
 <p align="center">
   <a href="https://github.com/xwtaidev/obsidian-lattice-plugin">
     <picture>
-      <source media="(max-width: 600px) and (prefers-color-scheme: dark)" srcset="assets/lattice-mobile-dark.svg">
-      <source media="(max-width: 600px) and (prefers-color-scheme: light)" srcset="assets/lattice-mobile-light.svg">
+      <source media="(max-width: 600px)" srcset="assets/lattice-mobile.svg">
       <source media="(prefers-color-scheme: dark)" srcset="assets/lattice-dark.svg">
       <source media="(prefers-color-scheme: light)" srcset="assets/lattice-light.svg">
       <img width="49%" src="assets/lattice-light.svg" alt="Lattice Board：Obsidian 笔记看板，按属性分列，拖动卡片更新属性。原型开发中。点击查看项目。">
@@ -24,8 +22,7 @@
   </a>
   <a href="https://github.com/xwtaidev/obsidian-weekly-schedule-plugin">
     <picture>
-      <source media="(max-width: 600px) and (prefers-color-scheme: dark)" srcset="assets/weekly-schedule-mobile-dark.svg">
-      <source media="(max-width: 600px) and (prefers-color-scheme: light)" srcset="assets/weekly-schedule-mobile-light.svg">
+      <source media="(max-width: 600px)" srcset="assets/weekly-schedule-mobile.svg">
       <source media="(prefers-color-scheme: dark)" srcset="assets/weekly-schedule-dark.svg">
       <source media="(prefers-color-scheme: light)" srcset="assets/weekly-schedule-light.svg">
       <img width="49%" src="assets/weekly-schedule-light.svg" alt="Weekly Schedule：在 Obsidian 中用四象限规划每周任务，回顾每一周和全年的进展。开源，使用 Markdown 存储。点击查看项目。">
@@ -36,11 +33,10 @@
 #### <sub><samp>BUILDING NOW / 正在构建</samp></sub>
 
 <picture>
-  <source media="(max-width: 600px) and (prefers-color-scheme: dark)" srcset="assets/vibespace-mobile-dark.svg">
-  <source media="(max-width: 600px) and (prefers-color-scheme: light)" srcset="assets/vibespace-mobile-light.svg">
+  <source media="(max-width: 600px)" srcset="assets/vibespace-mobile.svg">
   <source media="(prefers-color-scheme: dark)" srcset="assets/vibespace-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="assets/vibespace-light.svg">
-  <img src="assets/vibespace-light.svg" alt="VibeSpace：本地优先的 macOS AI 工作空间，探索用智能体协作与任务看板把想法推进为实际成果。开发中，尚未公开发布。">
+  <img width="100%" src="assets/vibespace-light.svg" alt="VibeSpace：本地优先的 macOS AI 工作空间，探索用智能体协作与任务看板把想法推进为实际成果。开发中，尚未公开发布。">
 </picture>
 
 #### <sub><samp>HOW I BUILD / 创作理念</samp></sub>

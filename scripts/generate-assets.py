@@ -37,6 +37,20 @@ def write(name, width, height, title, description, artwork):
     OUTPUTS.append((name, width, height, source))
 
 
+def adaptive_theme(source):
+    # GitHub rewrites an entire source media condition when it contains
+    # prefers-color-scheme. Keep viewport selection in README independent;
+    # embedded SVG media queries inherit the host image's color scheme.
+    for token, color in PALETTES['light'].items():
+        source = source.replace(color, f'var(--{token})')
+    rules = []
+    for theme, palette in PALETTES.items():
+        variables = ';'.join(f'--{token}:{color}' for token, color in palette.items())
+        rule = f':root{{{variables}}}'
+        rules.append(rule if theme == 'light' else f'@media (prefers-color-scheme: dark){{{rule}}}')
+    return source.replace('<title ', '<style>' + ''.join(rules) + '</style>\n<title ', 1)
+
+
 def icon(kind, x, y, p, scale=1):
     if kind == 'lattice':
         shapes = ''.join(f'<rect x="{a}" y="{b}" width="5" height="5" rx="1"/>'
@@ -139,7 +153,9 @@ def main():
     ASSETS.mkdir(exist_ok=True)
     for theme, palette in PALETTES.items():
         for mobile in [False, True]:
-            suffix = f'-mobile-{theme}' if mobile else f'-{theme}'
+            if mobile and theme == 'dark':
+                continue
+            suffix = '-mobile' if mobile else f'-{theme}'
             width, height, art = header(palette, mobile)
             write(f'header{suffix}.svg', width, height, '把想法，做成好用的产品。', 'xwtaidev，独立开发者与产品创作者。', art)
             width, height, art = vibespace_card(palette, mobile)
@@ -159,6 +175,8 @@ def main():
                 if left < -1 or top < -1 or right > width + 1 or bottom > height + 1:
                     raise ValueError(f'{name}: text outside SVG: {REQUESTS[index]["content"]} {shape["bounds"]}')
             source = source.replace(f'<!-- outline:{index} -->', f'<path d="{shape["path"]}"/>')
+        if name.endswith('-mobile.svg'):
+            source = adaptive_theme(source)
         (ASSETS / name).write_text(source)
     print(f'Generated {len(OUTPUTS)} SVGs with outlined glyphs. Fonts: {", ".join(sorted(fonts))}.')
     print(f'Total SVG size: {sum((ASSETS / name).stat().st_size for name, *_ in OUTPUTS):,} bytes.')
