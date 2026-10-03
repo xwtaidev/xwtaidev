@@ -18,6 +18,38 @@ PALETTES = {
              'border': '#30363d', 'accent': '#89b7a6', 'soft': '#172521',
              'grid': '#30463c', 'chip': '#25392f', 'link': '#58a6ff'},
 }
+COPY = {
+    'zh-CN': {
+        'headline': ['把想法，', '做成好用的产品。'],
+        'header_title': '把想法，做成好用的产品。',
+        'header_description': 'xwtaidev，独立开发者与产品创作者。',
+        'plugin': 'Obsidian 插件', 'project_link': '查看项目',
+        'vibespace_title': 'VibeSpace · 开发中',
+        'vibespace_description': '本地优先的 macOS AI 工作空间，探索智能体协作与 AI Kanban。尚未公开发布。',
+        'vibespace_badge': '开发中 · 尚未公开发布',
+        'vibespace_lines': ['本地优先的 macOS AI 工作空间。',
+                            '探索用智能体协作与任务看板，把想法推进为实际成果。'],
+        'vibespace_mobile': ['本地优先的 macOS AI 工作空间。',
+                             '用智能体协作与任务看板，', '把想法推进为实际成果。'],
+        'vibespace_footer': '本地优先 / 智能体协作 / AI 看板',
+        'local': '本地优先', 'agents': '智能体协作',
+    },
+    'en': {
+        'headline': ['Turning ideas', 'into useful products.'],
+        'header_title': 'Turning ideas into useful products.',
+        'header_description': 'xwtaidev, independent developer and product maker.',
+        'plugin': 'Obsidian plugin', 'project_link': 'View project',
+        'vibespace_title': 'VibeSpace · In development',
+        'vibespace_description': 'A local-first AI workspace for macOS, exploring AI agent collaboration and Kanban. In development, not yet public.',
+        'vibespace_badge': 'In development · Not yet public',
+        'vibespace_lines': ['A local-first AI workspace for macOS.',
+                            'Exploring AI agents and task boards to turn ideas into real outcomes.'],
+        'vibespace_mobile': ['A local-first AI workspace for macOS.',
+                             'AI agents and task boards,', 'to move ideas into real outcomes.'],
+        'vibespace_footer': 'Local first / Agent collaboration / Kanban',
+        'local': 'Local first', 'agents': 'Agent collaboration',
+    },
+}
 
 
 def text(x, y, content, color, size, weight=400, mono=False, tracking=0):
@@ -67,18 +99,19 @@ def icon(kind, x, y, p, scale=1):
             f'stroke="{p["accent"]}" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">{shapes}</g>')
 
 
-def header(p, mobile=False):
+def header(p, mobile=False, language='zh-CN'):
+    copy = COPY[language]
     width, height = (360, 200) if mobile else (720, 228)
     art = [f'<rect width="{width}" height="{height}" rx="6" fill="{p["soft"]}"/>']
     if mobile:
         art += [text(24, 34, 'INDEPENDENT MAKER', p['accent'], 18, mono=True, tracking=.6),
-                text(24, 86, '把想法，', p['text'], 32, 600),
-                text(24, 130, '做成好用的产品。', p['text'], 32, 600),
+                text(24, 86, copy['headline'][0], p['text'], 30 if language == 'en' else 32, 600),
+                text(24, 130, copy['headline'][1], p['text'], 30 if language == 'en' else 32, 600),
                 text(24, 177, 'xwtaidev / building with care', p['accent'], 18, mono=True)]
     else:
         art += [text(34, 46, 'INDEPENDENT DEVELOPER · PRODUCT MAKER', p['accent'], 11.8, mono=True, tracking=1.5),
-                text(34, 101, '把想法，', p['text'], 32, 600, tracking=-.4),
-                text(34, 147, '做成好用的产品。', p['text'], 32, 600, tracking=-.4),
+                text(34, 101, copy['headline'][0], p['text'], 32, 600, tracking=-.4),
+                text(34, 147, copy['headline'][1], p['text'], 32, 600, tracking=-.4),
                 text(34, 187, 'xwtaidev / building with care', p['accent'], 13, mono=True),
                 '<g transform="translate(540 36) rotate(-6 71 71)">']
         active = {(0, 2), (1, 1), (2, 1), (2, 2), (3, 1)}
@@ -92,17 +125,32 @@ def header(p, mobile=False):
 
 
 PROJECTS = {
-    'lattice': {'name': 'Lattice Board', 'status': 'Obsidian 插件 · 原型开发中', 'icon': 'lattice',
-                'lines': ['把笔记组织成看板，按属性分列。', '拖动卡片，更新属性并推进工作。'],
-                'mobile': ['笔记变成看板，', '按属性分列。', '拖动即可', '更新笔记属性。']},
-    'weekly-schedule': {'name': 'Weekly Schedule', 'status': 'Obsidian 插件 · 开源', 'icon': 'calendar',
-                        'lines': ['用四象限安排每天的任务，', '按周规划，从年度视图回顾进展。'],
-                        'mobile': ['四象限安排任务，', '规划每一周。', '从年度视图，', '回顾整体进展。']},
+    'lattice': {'name': 'Lattice Board', 'icon': 'lattice'},
+    'weekly-schedule': {'name': 'Weekly Schedule', 'icon': 'calendar'},
+}
+PROJECT_TEXT = {
+    'zh-CN': {
+        'lattice': {'status': 'Obsidian 插件 · 原型开发中', 'mobile_status': '原型开发中',
+                    'lines': ['把笔记组织成看板，按属性分列。', '拖动卡片，更新属性并推进工作。'],
+                    'mobile': ['笔记变成看板，', '按属性分列。', '拖动即可', '更新笔记属性。']},
+        'weekly-schedule': {'status': 'Obsidian 插件 · 开源', 'mobile_status': '开源',
+                            'lines': ['用四象限安排每天的任务，', '按周规划，从年度视图回顾进展。'],
+                            'mobile': ['四象限安排任务，', '规划每一周。', '从年度视图，', '回顾整体进展。']},
+    },
+    'en': {
+        'lattice': {'status': 'Obsidian plugin · Prototype', 'mobile_status': 'Prototype',
+                    'lines': ['Group notes by property in a board.', 'Drag cards to update note properties.'],
+                    'mobile': ['Group notes by', 'their properties.', 'Drag cards to', 'update notes.']},
+        'weekly-schedule': {'status': 'Obsidian plugin · Open source', 'mobile_status': 'Open source',
+                            'lines': ['Plan daily tasks in four quadrants.', 'Plan your week. Look back on your year.'],
+                            'mobile': ['Four quadrants.', 'Weekly plans.', 'A yearly view', 'of your progress.']},
+    },
 }
 
 
-def project_card(p, kind, mobile=False):
+def project_card(p, kind, mobile=False, language='zh-CN'):
     project = PROJECTS[kind]
+    copy = PROJECT_TEXT[language][kind]
     width, height = (140, 316) if mobile else (320, 230)
     art = [f'<rect x=".55" y=".55" width="{width - 1.1}" height="{height - 1.1}" rx="6.4" fill="{p["surface"]}" stroke="{p["border"]}" stroke-width="1.1"/>']
     if mobile:
@@ -110,59 +158,67 @@ def project_card(p, kind, mobile=False):
         art += [icon(project['icon'], 12, 20, p),
                 text(12, 65, title_lines[0], p['text'], 18.5, 600, tracking=-.15),
                 text(12, 90, title_lines[1], p['text'], 18.5, 600, tracking=-.15),
-                text(12, 117, 'Obsidian 插件', p['muted'], 14.3),
-                text(12, 140, '原型开发中' if kind == 'lattice' else '开源', p['muted'], 14.3)]
+                text(12, 117, COPY[language]['plugin'], p['muted'], 14.3),
+                text(12, 140, copy['mobile_status'], p['muted'], 14.3)]
     else:
         art += [icon(project['icon'], 24, 24, p),
                 text(24, 73, project['name'], p['text'], 18.5, 600, tracking=-.15),
-                text(24, 98, project['status'], p['muted'], 12.3)]
-    lines = project['mobile'] if mobile else project['lines']
+                text(24, 98, copy['status'], p['muted'], 12.3)]
+    lines = copy['mobile'] if mobile else copy['lines']
     for index, line in enumerate(lines):
         art.append(text(12 if mobile else 24, (183 if mobile else 132) + index * (24 if mobile else 26), line, p['muted'], 14.5 if mobile else 14))
     baseline = 295 if mobile else 203
-    art += [text(12 if mobile else 24, baseline, '查看项目', p['link'], 14.5 if mobile else 13.3),
-            f'<path d="M87 {baseline - 1}l8-8m-8 0h8v8" fill="none" stroke="{p["link"]}" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>']
+    arrow_x = 116 if language == 'en' else 87
+    art += [text(12 if mobile else 24, baseline, COPY[language]['project_link'], p['link'], 14.5 if mobile else 13.3),
+            f'<path d="M{arrow_x} {baseline - 1}l8-8m-8 0h8v8" fill="none" stroke="{p["link"]}" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>']
     return width, height, '\n'.join(art)
 
 
-def vibespace_card(p, mobile=False):
+def vibespace_card(p, mobile=False, language='zh-CN'):
+    copy = COPY[language]
+    english = language == 'en'
     width, height = (360, 226) if mobile else (720, 188)
     art = [f'<rect x=".55" y=".55" width="{width - 1.1}" height="{height - 1.1}" rx="6.4" fill="{p["surface"]}" stroke="{p["border"]}" stroke-width="1.1"/>',
            f'<rect x=".55" y="8" width="2.7" height="{height - 16}" rx="1.3" fill="{p["accent"]}"/>']
     if mobile:
         art += [text(24, 46, 'VibeSpace', p['text'], 30, 600),
-                f'<rect x="24" y="61" width="208" height="27" rx="13.5" fill="{p["chip"]}"/>',
-                text(36, 81, '开发中 · 尚未公开发布', p['accent'], 18),
-                text(24, 124, '本地优先的 macOS AI 工作空间。', p['muted'], 20),
-                text(24, 154, '用智能体协作与任务看板，', p['muted'], 20),
-                text(24, 184, '把想法推进为实际成果。', p['muted'], 20),
-                text(24, 214, '本地优先 / 智能体协作 / AI 看板', p['accent'], 17)]
+                f'<rect x="24" y="61" width="{252 if english else 208}" height="27" rx="13.5" fill="{p["chip"]}"/>',
+                text(36, 81, copy['vibespace_badge'], p['accent'], 15.5 if english else 18),
+                text(24, 124, copy['vibespace_mobile'][0], p['muted'], 17.5 if english else 20),
+                text(24, 154, copy['vibespace_mobile'][1], p['muted'], 17.5 if english else 20),
+                text(24, 184, copy['vibespace_mobile'][2], p['muted'], 17.5 if english else 20),
+                text(24, 214, copy['vibespace_footer'], p['accent'], 15.5 if english else 17)]
     else:
         art += [text(30, 51, 'VibeSpace', p['text'], 23.5, 600, tracking=-.3),
-                f'<rect x="154" y="32" width="142" height="26" rx="13" fill="{p["chip"]}"/>',
-                text(166, 50, '开发中 · 尚未公开发布', p['accent'], 11.5),
-                text(30, 90, '本地优先的 macOS AI 工作空间。', p['muted'], 15),
-                text(30, 118, '探索用智能体协作与任务看板，把想法推进为实际成果。', p['muted'], 15),
-                icon('monitor', 30, 147, p), text(52, 159, '本地优先', p['muted'], 12.7),
-                icon('workflow', 130, 147, p), text(152, 159, '智能体协作', p['muted'], 12.7),
-                icon('kanban', 258, 147, p), text(280, 159, 'AI Kanban', p['muted'], 12.7)]
+                f'<rect x="154" y="32" width="{194 if english else 142}" height="26" rx="13" fill="{p["chip"]}"/>',
+                text(166, 50, copy['vibespace_badge'], p['accent'], 11.5),
+                text(30, 90, copy['vibespace_lines'][0], p['muted'], 15),
+                text(30, 118, copy['vibespace_lines'][1], p['muted'], 15),
+                icon('monitor', 30, 147, p), text(52, 159, copy['local'], p['muted'], 12.7),
+                icon('workflow', 158 if english else 130, 147, p), text(180 if english else 152, 159, copy['agents'], p['muted'], 12.7),
+                icon('kanban', 332 if english else 258, 147, p), text(354 if english else 280, 159, 'AI Kanban', p['muted'], 12.7)]
     return width, height, '\n'.join(art)
 
 
 def main():
     ASSETS.mkdir(exist_ok=True)
-    for theme, palette in PALETTES.items():
-        for mobile in [False, True]:
-            if mobile and theme == 'dark':
-                continue
-            suffix = '-mobile' if mobile else f'-{theme}'
-            width, height, art = header(palette, mobile)
-            write(f'header{suffix}.svg', width, height, '把想法，做成好用的产品。', 'xwtaidev，独立开发者与产品创作者。', art)
-            width, height, art = vibespace_card(palette, mobile)
-            write(f'vibespace{suffix}.svg', width, height, 'VibeSpace · 开发中', '本地优先的 macOS AI 工作空间，探索智能体协作与 AI Kanban。尚未公开发布。', art)
-            for kind, project in PROJECTS.items():
-                width, height, art = project_card(palette, kind, mobile)
-                write(f'{kind}{suffix}.svg', width, height, project['name'], project['status'] + '。' + ''.join(project['lines']), art)
+    for language, copy in COPY.items():
+        prefix = 'en/' if language == 'en' else ''
+        for theme, palette in PALETTES.items():
+            for mobile in [False, True]:
+                if mobile and theme == 'dark':
+                    continue
+                suffix = '-mobile' if mobile else f'-{theme}'
+                width, height, art = header(palette, mobile, language)
+                write(f'{prefix}header{suffix}.svg', width, height, copy['header_title'], copy['header_description'], art)
+                width, height, art = vibespace_card(palette, mobile, language)
+                write(f'{prefix}vibespace{suffix}.svg', width, height, copy['vibespace_title'], copy['vibespace_description'], art)
+                for kind, project in PROJECTS.items():
+                    project_copy = PROJECT_TEXT[language][kind]
+                    separator = '. ' if language == 'en' else '。'
+                    width, height, art = project_card(palette, kind, mobile, language)
+                    description = project_copy['status'] + separator + (' ' if language == 'en' else '').join(project_copy['lines'])
+                    write(f'{prefix}{kind}{suffix}.svg', width, height, project['name'], description, art)
     shapes = outline(REQUESTS)
     fonts = set()
     for name, width, height, source in OUTPUTS:
@@ -177,7 +233,9 @@ def main():
             source = source.replace(f'<!-- outline:{index} -->', f'<path d="{shape["path"]}"/>')
         if name.endswith('-mobile.svg'):
             source = adaptive_theme(source)
-        (ASSETS / name).write_text(source)
+        target = ASSETS / name
+        target.parent.mkdir(exist_ok=True)
+        target.write_text(source)
     print(f'Generated {len(OUTPUTS)} SVGs with outlined glyphs. Fonts: {", ".join(sorted(fonts))}.')
     print(f'Total SVG size: {sum((ASSETS / name).stat().st_size for name, *_ in OUTPUTS):,} bytes.')
 
